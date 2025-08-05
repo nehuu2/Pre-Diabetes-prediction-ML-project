@@ -1,0 +1,20 @@
+2025-08-05 22:47:18,169 - INFO - 🚀 Starting DiabetesPredict application...
+2025-08-05 22:47:18,169 - INFO - 🔄 Loading model and data...
+2025-08-05 22:47:18,170 - INFO - 🔄 Starting model loading process...
+2025-08-05 22:47:18,170 - INFO - ✅ Warnings suppressed for version compatibility
+2025-08-05 22:47:18,170 - INFO - 📁 Found model file: notebooks/logistic_model.pkl
+2025-08-05 22:47:18,170 - INFO - 📁 Found scaler file: notebooks/scaler.pkl
+2025-08-05 22:47:18,467 - INFO - ✅ Model loaded successfully
+2025-08-05 22:47:18,468 - INFO - ✅ Scaler loaded successfully
+2025-08-05 22:47:18,468 - INFO - 🔍 Model type: <class 'sklearn.linear_model._logistic.LogisticRegression'>
+2025-08-05 22:47:18,468 - INFO - 🔍 Scaler type: <class 'sklearn.preprocessing._data.StandardScaler'>
+2025-08-05 22:47:18,469 - INFO - 🔄 Starting data loading process...
+2025-08-05 22:47:18,469 - INFO - 📁 Found data file: Data/cleaned_diabetes_data2.csv
+2025-08-05 22:47:18,478 - INFO - ✅ Data loaded successfully - Shape: (767, 10)
+2025-08-05 22:47:18,479 - INFO - 🔍 Columns: ['Unnamed: 0', 'Pregnancies', 'Glucose', 'BloodPressure', 'SkinThickness', 'Insulin', 'BMI', 'DiabetesPedigreeFunction', 'Age', 'Outcome']
+2025-08-05 22:47:18,479 - INFO - 🔍 Data types: {'Unnamed: 0': dtype('int64'), 'Pregnancies': dtype('int64'), 'Glucose': dtype('float64'), 'BloodPressure': dtype('float64'), 'SkinThickness': dtype('float64'), 'Insulin': dtype('float64'), 'BMI': dtype('float64'), 'DiabetesPedigreeFunction': dtype('float64'), 'Age': dtype('int64'), 'Outcome': dtype('int64')}
+2025-08-05 22:47:18,480 - INFO - ✅ No missing values found
+2025-08-05 22:47:18,480 - INFO - ✅ Model and data loaded successfully
+2025-08-05 22:47:18,480 - INFO - 🔄 Initialized session state with Home page
+2025-08-05 22:47:18,480 - INFO - 🔍 Current page: 🏠 Home
+2025-08-05 22:47:18,481 - INFO - 🔄 Routing to page: 🏠 Home
