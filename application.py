@@ -31,49 +31,179 @@ st.set_page_config(
     initial_sidebar_state="collapsed"
 )
 
-# Simple, clean CSS
+# Beautiful, modern CSS
 st.markdown("""
 <style>
+    /* Global styles */
+    .main {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+    }
+    
+    /* Hide Streamlit default elements */
+    #MainMenu {visibility: hidden;}
+    footer {visibility: hidden;}
+    header {visibility: hidden;}
+    
+    /* Custom headers */
     .main-header {
         text-align: center;
-        color: #1f77b4;
+        color: #2c3e50;
         margin-bottom: 2rem;
+        font-size: 2.5rem;
+        font-weight: 700;
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
     }
+    
+    /* Beautiful form container */
     .prediction-form {
-        background-color: #f8f9fa;
-        padding: 2rem;
-        border-radius: 10px;
+        background: linear-gradient(145deg, #ffffff 0%, #f8f9fa 100%);
+        padding: 2.5rem;
+        border-radius: 20px;
         margin: 2rem 0;
+        box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        border: 1px solid rgba(255,255,255,0.2);
     }
+    
+    /* Section headers */
+    .section-header {
+        color: #34495e;
+        font-size: 1.5rem;
+        font-weight: 600;
+        margin-bottom: 1rem;
+        border-bottom: 3px solid #3498db;
+        padding-bottom: 0.5rem;
+    }
+    
+    /* Result boxes with animations */
     .result-box {
-        padding: 1.5rem;
-        border-radius: 10px;
-        margin: 1rem 0;
+        padding: 2rem;
+        border-radius: 15px;
+        margin: 1.5rem 0;
         text-align: center;
         font-weight: bold;
+        font-size: 1.2rem;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        animation: slideIn 0.5s ease-out;
     }
+    
+    @keyframes slideIn {
+        from { opacity: 0; transform: translateY(30px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+    
     .high-risk {
-        background-color: #ffebee;
-        color: #c62828;
-        border: 2px solid #ef5350;
+        background: linear-gradient(145deg, #ff6b6b 0%, #ee5a52 100%);
+        color: white;
+        border: none;
+        box-shadow: 0 10px 30px rgba(255,107,107,0.3);
     }
+    
     .low-risk {
-        background-color: #e8f5e8;
-        color: #2e7d32;
-        border: 2px solid #66bb6a;
+        background: linear-gradient(145deg, #51cf66 0%, #40c057 100%);
+        color: white;
+        border: none;
+        box-shadow: 0 10px 30px rgba(81,207,102,0.3);
     }
+    
+    /* Metric cards */
     .metric-container {
         display: flex;
         justify-content: space-around;
         margin: 1rem 0;
+        flex-wrap: wrap;
     }
+    
     .metric-card {
-        background: white;
-        padding: 1rem;
-        border-radius: 8px;
-        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        background: linear-gradient(145deg, #ffffff 0%, #f8f9fa 100%);
+        padding: 1.5rem;
+        border-radius: 15px;
+        box-shadow: 0 8px 25px rgba(0,0,0,0.1);
         text-align: center;
         margin: 0.5rem;
+        border: 1px solid rgba(255,255,255,0.2);
+        transition: transform 0.3s ease;
+    }
+    
+    .metric-card:hover {
+        transform: translateY(-5px);
+    }
+    
+    /* Button styling */
+    .stButton > button {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        border: none;
+        padding: 1rem 2rem;
+        border-radius: 50px;
+        font-weight: 600;
+        font-size: 1.1rem;
+        transition: all 0.3s ease;
+        box-shadow: 0 8px 25px rgba(102,126,234,0.3);
+    }
+    
+    .stButton > button:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 12px 35px rgba(102,126,234,0.4);
+    }
+    
+    /* Input styling */
+    .stNumberInput > div > div > input {
+        border-radius: 10px;
+        border: 2px solid #e9ecef;
+        padding: 0.75rem;
+        transition: all 0.3s ease;
+        font-size: 1rem;
+    }
+    
+    .stNumberInput > div > div > input:focus {
+        border-color: #667eea;
+        box-shadow: 0 0 0 3px rgba(102,126,234,0.2);
+    }
+    
+    /* Sidebar styling */
+    .css-1d391kg {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    }
+    
+    /* Main content area */
+    .main .block-container {
+        padding-top: 2rem;
+        padding-bottom: 2rem;
+        max-width: 1200px;
+    }
+    
+    /* Success and info messages */
+    .stSuccess {
+        background: linear-gradient(145deg, #51cf66 0%, #40c057 100%);
+        color: white;
+        border-radius: 10px;
+        padding: 1rem;
+        margin: 1rem 0;
+    }
+    
+    .stInfo {
+        background: linear-gradient(145deg, #74b9ff 0%, #0984e3 100%);
+        color: white;
+        border-radius: 10px;
+        padding: 1rem;
+        margin: 1rem 0;
+    }
+    
+    /* Dataframe styling */
+    .dataframe {
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    
+    /* Health tips styling */
+    .health-tips {
+        background: linear-gradient(145deg, #f8f9fa 0%, #e9ecef 100%);
+        padding: 1.5rem;
+        border-radius: 15px;
+        margin: 1rem 0;
+        border-left: 5px solid #667eea;
     }
 </style>
 """, unsafe_allow_html=True)
@@ -151,74 +281,142 @@ def main():
         st.error("❌ Failed to load the model. Please check if the model files exist.")
         return
     
+    # Initialize session state for navigation
+    if 'page' not in st.session_state:
+        st.session_state.page = "🏠 Home"
+    
     # Simple navigation
     st.sidebar.title("🏥 DiabetesPredict")
     page = st.sidebar.selectbox(
         "Choose a page:",
-        ["🏠 Home", "🔮 Prediction", "📊 Analysis", "ℹ️ About"]
+        ["🏠 Home", "🔮 Prediction", "📊 Analysis", "ℹ️ About"],
+        index=["🏠 Home", "🔮 Prediction", "📊 Analysis", "ℹ️ About"].index(st.session_state.page)
     )
     
-    if page == "🏠 Home":
+    # Update session state when page changes
+    if page != st.session_state.page:
+        st.session_state.page = page
+        st.rerun()
+    
+    # Route to appropriate page
+    if st.session_state.page == "🏠 Home":
         show_home_page()
-    elif page == "🔮 Prediction":
+    elif st.session_state.page == "🔮 Prediction":
         show_prediction_page(model, scaler)
-    elif page == "📊 Analysis":
+    elif st.session_state.page == "📊 Analysis":
         show_analysis_page(df)
-    elif page == "ℹ️ About":
+    elif st.session_state.page == "ℹ️ About":
         show_about_page()
 
 def show_home_page():
     st.markdown('<h1 class="main-header">🏥 DiabetesPredict</h1>', unsafe_allow_html=True)
     
+    # Hero section
     st.markdown("""
-    ## Welcome to DiabetesPredict
+    <div style="text-align: center; padding: 2rem; background: linear-gradient(145deg, rgba(255,255,255,0.9) 0%, rgba(248,249,250,0.9) 100%); border-radius: 20px; margin: 2rem 0;">
+        <h2 style="color: #2c3e50; font-size: 1.8rem; margin-bottom: 1rem;">AI-Powered Diabetes Risk Assessment</h2>
+        <p style="color: #7f8c8d; font-size: 1.1rem; line-height: 1.6;">
+            Get instant, accurate predictions using our trained machine learning model. 
+            Simply enter your health parameters and receive personalized risk assessment.
+        </p>
+    </div>
+    """, unsafe_allow_html=True)
     
-    This application uses machine learning to predict the risk of diabetes based on health parameters.
+    # Features section
+    st.markdown("### 🚀 Key Features")
+    col1, col2 = st.columns(2)
     
-    ### How it works:
-    1. **Enter your health data** in the prediction form
-    2. **Get instant results** with risk assessment
-    3. **View detailed analysis** of your data
+    with col1:
+        st.markdown("""
+        <div style="background: linear-gradient(145deg, #ffffff 0%, #f8f9fa 100%); padding: 1.5rem; border-radius: 15px; margin: 1rem 0; box-shadow: 0 8px 25px rgba(0,0,0,0.1);">
+            <h4 style="color: #3498db; margin-bottom: 0.5rem;">🤖 AI-Powered</h4>
+            <p style="color: #7f8c8d; margin: 0;">Trained logistic regression model with 76% accuracy</p>
+        </div>
+        """, unsafe_allow_html=True)
+        
+        st.markdown("""
+        <div style="background: linear-gradient(145deg, #ffffff 0%, #f8f9fa 100%); padding: 1.5rem; border-radius: 15px; margin: 1rem 0; box-shadow: 0 8px 25px rgba(0,0,0,0.1);">
+            <h4 style="color: #3498db; margin-bottom: 0.5rem;">⚡ Instant Results</h4>
+            <p style="color: #7f8c8d; margin: 0;">Get predictions in seconds with detailed probability</p>
+        </div>
+        """, unsafe_allow_html=True)
     
-    ### Features:
-    - 🤖 **AI-Powered Prediction**: Uses trained logistic regression model
-    - 📊 **Data Visualization**: Interactive charts and analysis
-    - 🔒 **Privacy First**: All data processed locally
-    - ⚡ **Instant Results**: Get predictions in seconds
+    with col2:
+        st.markdown("""
+        <div style="background: linear-gradient(145deg, #ffffff 0%, #f8f9fa 100%); padding: 1.5rem; border-radius: 15px; margin: 1rem 0; box-shadow: 0 8px 25px rgba(0,0,0,0.1);">
+            <h4 style="color: #3498db; margin-bottom: 0.5rem;">🔒 Privacy First</h4>
+            <p style="color: #7f8c8d; margin: 0;">All data processed locally, nothing stored</p>
+        </div>
+        """, unsafe_allow_html=True)
+        
+        st.markdown("""
+        <div style="background: linear-gradient(145deg, #ffffff 0%, #f8f9fa 100%); padding: 1.5rem; border-radius: 15px; margin: 1rem 0; box-shadow: 0 8px 25px rgba(0,0,0,0.1);">
+            <h4 style="color: #3498db; margin-bottom: 0.5rem;">📊 Data Insights</h4>
+            <p style="color: #7f8c8d; margin: 0;">Interactive visualizations and analysis</p>
+        </div>
+        """, unsafe_allow_html=True)
     
-    ---
-    """)
-    
+    # How it works section
+    st.markdown("### 📋 How It Works")
     col1, col2, col3 = st.columns(3)
     
     with col1:
         st.markdown("""
-        ### 📝 Step 1
-        Enter your health parameters like glucose, blood pressure, BMI, etc.
-        """)
+        <div style="text-align: center; padding: 1.5rem; background: linear-gradient(145deg, #667eea 0%, #764ba2 100%); border-radius: 15px; color: white; margin: 1rem 0;">
+            <h3 style="margin-bottom: 0.5rem;">1️⃣ Enter Data</h3>
+            <p style="margin: 0; opacity: 0.9;">Input your health parameters like glucose, blood pressure, BMI, etc.</p>
+        </div>
+        """, unsafe_allow_html=True)
     
     with col2:
         st.markdown("""
-        ### 🤖 Step 2
-        Our AI model analyzes your data against thousands of samples.
-        """)
+        <div style="text-align: center; padding: 1.5rem; background: linear-gradient(145deg, #667eea 0%, #764ba2 100%); border-radius: 15px; color: white; margin: 1rem 0;">
+            <h3 style="margin-bottom: 0.5rem;">2️⃣ AI Analysis</h3>
+            <p style="margin: 0; opacity: 0.9;">Our model analyzes your data against thousands of samples</p>
+        </div>
+        """, unsafe_allow_html=True)
     
     with col3:
         st.markdown("""
-        ### ✅ Step 3
-        Get your risk assessment with detailed probability.
-        """)
+        <div style="text-align: center; padding: 1.5rem; background: linear-gradient(145deg, #667eea 0%, #764ba2 100%); border-radius: 15px; color: white; margin: 1rem 0;">
+            <h3 style="margin-bottom: 0.5rem;">3️⃣ Get Results</h3>
+            <p style="margin: 0; opacity: 0.9;">Receive personalized risk assessment with health tips</p>
+        </div>
+        """, unsafe_allow_html=True)
     
-    st.markdown("---")
-    st.markdown("### Ready to predict?")
-    st.markdown("Use the sidebar navigation to go to the **🔮 Prediction** page and test your ML model!")
+    # Call to action
+    st.markdown("""
+    <div style="text-align: center; padding: 2rem; background: linear-gradient(145deg, #51cf66 0%, #40c057 100%); border-radius: 20px; margin: 2rem 0; color: white;">
+        <h3 style="margin-bottom: 1rem;">Ready to Predict Your Risk?</h3>
+        <p style="margin-bottom: 1.5rem; opacity: 0.9;">Click the button below to start your health assessment!</p>
+    </div>
+    """, unsafe_allow_html=True)
+    
+    # Prediction button
+    col1, col2, col3 = st.columns([1, 2, 1])
+    with col2:
+        if st.button("🚀 Predict Now", use_container_width=True, type="primary"):
+            # Update sidebar selection
+            st.session_state.page = "🔮 Prediction"
+            st.rerun()
 
 def show_prediction_page(model, scaler):
     st.markdown('<h1 class="main-header">🔮 Diabetes Prediction</h1>', unsafe_allow_html=True)
     
+    # Back to home button
+    col1, col2, col3 = st.columns([1, 2, 1])
+    with col1:
+        if st.button("🏠 Back to Home", use_container_width=True):
+            st.session_state.page = "🏠 Home"
+            st.rerun()
+    
     st.markdown("""
-    Enter your health parameters below to get your diabetes risk assessment.
-    """)
+    <div style="text-align: center; padding: 1.5rem; background: linear-gradient(145deg, rgba(255,255,255,0.9) 0%, rgba(248,249,250,0.9) 100%); border-radius: 15px; margin: 1rem 0;">
+        <p style="color: #2c3e50; font-size: 1.1rem; margin: 0;">
+            Enter your health parameters below to get your personalized diabetes risk assessment.
+        </p>
+    </div>
+    """, unsafe_allow_html=True)
     
     # Quick test button
     col1, col2, col3 = st.columns([1, 1, 1])
@@ -254,16 +452,28 @@ def show_prediction_page(model, scaler):
         col1, col2 = st.columns(2)
         
         with col1:
-            st.markdown("### Personal Information")
+            st.markdown("""
+            <div style="background: linear-gradient(145deg, #667eea 0%, #764ba2 100%); color: white; padding: 1rem; border-radius: 10px; margin-bottom: 1rem;">
+                <h3 style="margin: 0; text-align: center;">👤 Personal Information</h3>
+            </div>
+            """, unsafe_allow_html=True)
             pregnancies = st.number_input("Number of Pregnancies", min_value=0, max_value=20, value=pregnancies_val)
             age = st.number_input("Age (years)", min_value=1, max_value=120, value=age_val)
             
-            st.markdown("### Blood Tests")
+            st.markdown("""
+            <div style="background: linear-gradient(145deg, #667eea 0%, #764ba2 100%); color: white; padding: 1rem; border-radius: 10px; margin: 1rem 0;">
+                <h3 style="margin: 0; text-align: center;">🩸 Blood Tests</h3>
+            </div>
+            """, unsafe_allow_html=True)
             glucose = st.number_input("Glucose Level (mg/dL)", min_value=0, max_value=300, value=glucose_val)
             insulin = st.number_input("Insulin Level (mu U/ml)", min_value=0, max_value=1000, value=insulin_val)
         
         with col2:
-            st.markdown("### Physical Measurements")
+            st.markdown("""
+            <div style="background: linear-gradient(145deg, #667eea 0%, #764ba2 100%); color: white; padding: 1rem; border-radius: 10px; margin-bottom: 1rem;">
+                <h3 style="margin: 0; text-align: center;">📏 Physical Measurements</h3>
+            </div>
+            """, unsafe_allow_html=True)
             blood_pressure = st.number_input("Blood Pressure (mm Hg)", min_value=0, max_value=200, value=blood_pressure_val)
             skin_thickness = st.number_input("Skin Thickness (mm)", min_value=0, max_value=100, value=skin_thickness_val)
             bmi = st.number_input("Body Mass Index (BMI)", min_value=10.0, max_value=70.0, value=bmi_val, step=0.1)
@@ -324,19 +534,29 @@ def show_prediction_page(model, scaler):
                 st.markdown("### 💡 Health Tips")
                 if prediction == 1:
                     st.markdown("""
-                    - **Monitor blood sugar** regularly
-                    - **Exercise** at least 30 minutes daily
-                    - **Eat a balanced diet** low in processed sugars
-                    - **Maintain healthy weight**
-                    - **Schedule regular check-ups** with your doctor
-                    """)
+                    <div class="health-tips">
+                        <h4 style="color: #e74c3c; margin-bottom: 1rem;">⚠️ Important Recommendations:</h4>
+                        <ul style="color: #2c3e50; line-height: 1.8;">
+                            <li><strong>Monitor blood sugar</strong> regularly</li>
+                            <li><strong>Exercise</strong> at least 30 minutes daily</li>
+                            <li><strong>Eat a balanced diet</strong> low in processed sugars</li>
+                            <li><strong>Maintain healthy weight</strong></li>
+                            <li><strong>Schedule regular check-ups</strong> with your doctor</li>
+                        </ul>
+                    </div>
+                    """, unsafe_allow_html=True)
                 else:
                     st.markdown("""
-                    - **Continue healthy habits**
-                    - **Regular exercise** and balanced diet
-                    - **Annual health check-ups**
-                    - **Monitor family history**
-                    """)
+                    <div class="health-tips">
+                        <h4 style="color: #27ae60; margin-bottom: 1rem;">✅ Keep Up the Good Work:</h4>
+                        <ul style="color: #2c3e50; line-height: 1.8;">
+                            <li><strong>Continue healthy habits</strong></li>
+                            <li><strong>Regular exercise</strong> and balanced diet</li>
+                            <li><strong>Annual health check-ups</strong></li>
+                            <li><strong>Monitor family history</strong></li>
+                        </ul>
+                    </div>
+                    """, unsafe_allow_html=True)
             else:
                 st.error("❌ Prediction failed. Please check your input values and try again.")
         
@@ -350,6 +570,13 @@ def show_analysis_page(df):
         return
     
     st.markdown('<h1 class="main-header">📊 Data Analysis</h1>', unsafe_allow_html=True)
+    
+    # Back to home button
+    col1, col2, col3 = st.columns([1, 2, 1])
+    with col1:
+        if st.button("🏠 Back to Home", use_container_width=True):
+            st.session_state.page = "🏠 Home"
+            st.rerun()
     
     # Basic statistics
     st.markdown("## 📈 Dataset Overview")
@@ -395,6 +622,13 @@ def show_analysis_page(df):
 
 def show_about_page():
     st.markdown('<h1 class="main-header">ℹ️ About DiabetesPredict</h1>', unsafe_allow_html=True)
+    
+    # Back to home button
+    col1, col2, col3 = st.columns([1, 2, 1])
+    with col1:
+        if st.button("🏠 Back to Home", use_container_width=True):
+            st.session_state.page = "🏠 Home"
+            st.rerun()
     
     st.markdown("""
     ## 🎯 Project Overview
