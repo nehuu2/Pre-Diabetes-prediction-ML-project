@@ -1,5 +1,12 @@
+##### FOR RENDER DEPLOYMENT #####
+pandas==2.2.2
+pip>=25.2
+setuptools
+wheel
+
+#####
 streamlit==1.28.1
-pandas==2.1.4
+# pandas==2.1.4
 numpy>=1.25.0
 scikit-learn==1.6.1
 matplotlib==3.8.0
